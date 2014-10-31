@@ -1,11 +1,13 @@
+require 'factory_girl_rails'
+
 module RemoteFactoryGirlHomeRails
-  class HomeController < ApplicationController 
+  class HomeController < ActionController::Base
 
     skip_before_filter *RemoteFactoryGirlHomeRails.skip_before_filter
     
     def create 
       if RemoteFactoryGirlHomeRails.enabled?
-        factory = FactoryGirl.create(factory(params), attributes(params))
+        factory = ::FactoryGirl.create(factory(params), attributes(params))
         render json: factory
       else
         forbidden = 403
@@ -14,7 +16,7 @@ module RemoteFactoryGirlHomeRails
     end
 
     def index
-      factories = FactoryGirl.factories.map(&:name)
+      factories = ::FactoryGirl.factories.map(&:name)
       render json: { factories: factories }
     end
 
