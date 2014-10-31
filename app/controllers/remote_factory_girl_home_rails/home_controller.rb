@@ -1,4 +1,5 @@
 require 'factory_girl_rails'
+require 'ffaker'
 
 module RemoteFactoryGirlHomeRails
   class HomeController < ActionController::Base
